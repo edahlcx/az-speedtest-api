@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SpeedTestApi.Models;
 
 namespace SpeedTestApi.Controllers
 {
@@ -32,10 +33,13 @@ namespace SpeedTestApi.Controllers
             return "value";
         }
 
-        // POST api/values
+        //POST speedtest
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<string> UploadSpeedTest([FromBody] TestResult speedTest)
         {
+            var speedTestData = $"Got a TestResult from {speedTest.User} with download {speedTest.Data.Speeds.Download} Mbps.";
+
+            return Ok(speedTestData);
         }
 
         // PUT api/values/5
